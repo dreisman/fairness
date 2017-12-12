@@ -1,0 +1,62 @@
+code {
+  padding: 0;
+  font-size: 90%;
+  color: black;
+  background-color: white;
+  border: 0px solid white;
+}
+
+a code {
+  color: #08c;
+}
+
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  border:1px solid black;
+  background-color: GhostWhite;
+}
+
+th{
+  border:0px solid #000000;
+}
+
+td{
+  border:0px solid #000000;
+}
+
+blockquote p{margin-bottom:0;font-size:13px;font-weight:300;line-height:15px;}
+
+button.link {
+  background:none!important;
+  color:#8C8C8C;
+  border:none;
+  padding:0!important;
+  font: inherit;
+  /*border is optional*/
+  /*border-bottom:1px solid #444;*/
+  cursor: pointer;
+}
+
+.result {
+  display: block;
+  border-style: ridge;
+  margin: 12px 0;
+  padding: 5px;
+  background-color: GhostWhite;
+  font-style: normal;
+}
+.result:before {
+  content: "Result.";
+  font-weight: bold;
+  font-style: normal;
+}
+
+.textbox {
+  display: block;
+  border-style: ridge;
+  margin: 12px 0;
+  padding: 5px;
+  background-color: GhostWhite;
+  font-style: normal;
+}
