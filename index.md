@@ -52,7 +52,7 @@ $E(S \| Y = 1, A = b) = E(S \| Y = 1 , A = w)$ [[Kleinberg et al.]]
     </div>
 
 <div class="result" markdown="1">
-MAY NEED RELAXING - ASK ALEX: Cannot have 1 + 2 + 3 unless $S=Y$ (perfect prediction) or $p_b = p_w$ (equal base rates) [[Kleinberg et al.]]
+MAY NEED RELAXING: Cannot have 1 + 2 + 3 unless $S=Y$ (perfect prediction) or $p_b = p_w$ (equal base rates) [[Kleinberg et al.]]
 </div>
 
 #### Definitions based on $p(Y, d, A)$
