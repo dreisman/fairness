@@ -8,23 +8,23 @@ description:
 The source for this site is [here](https://github.com/speak-statistics-to-power/fairness). We welcome [pull requests](https://yangsu.github.io/pull-request-tutorial/) or emails (<sam942@mail.harvard.edu>) with additions and corrections!
 
 ## Notation
-$A =$ race, for simplicity only $ = b$ or $w$  
 $Y =$ outcome, for simplicity only binary (e.g. arrest, [a mismeasurement of offense](#data))  
-$S = \hat{P}(Y = 1)$ (e.g. estimated probability of arrest)  
-$d =$ decision/classifier, e.g. $=I(S > s_{\textrm{high-risk}})$  
-where $s_{\textrm{high-risk}} =$ cutoff/threshold  
-(Some papers aren't clear whether they mean $S$ or $d$)  
-$d(b) =$ decision had the person been black (a potential outcome)  
-$d(w) =$ decision had the person been white  
-The observed $d = d(b)$ if the person is black and $= d(w)$ if the person is white  
+$A =$ race, for simplicity only $ = b$ or $w$  
 $X =$ observed covariates (excludes $A$)  
-$i,j$ index people, e.g. $Y_i$ is the outcome for person $i$. Imagine all people are drawn ([independently and identically](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)) from a population distribution $p(A,Y,S,d,d(b),d(w),X)$. Many fairness definitions are properties of this distribution.  
-$p_a = P(Y=1\|A=a) =$ base rate
+$S = \hat{P}(Y = 1 | A, X) =$ estimated probability of the outcome  
+&nbsp;&nbsp;&nbsp;&nbsp;$= f(A, X, \mathbf{Y}^{\textrm{train}}, \mathbf{A}^{\textrm{train}}, \mathbf{X}^{\textrm{train}})$ where $f$ can be stochastic and takes training data  
+$d =$ decision/classifier, e.g. $=I(S > s_{\textrm{high-risk}})$ where $s_{\textrm{high-risk}} =$ cutoff/threshold. More generally,  
+&nbsp;&nbsp;&nbsp;&nbsp;$= f_d(A, X, \mathbf{Y}^{\textrm{train}}, \mathbf{A}^{\textrm{train}}, \mathbf{X}^{\textrm{train}})$ where $f_d$ can be stochastic and takes training data  
+&nbsp;&nbsp;&nbsp;&nbsp;(Some papers aren't clear whether they mean $S$ or $d$)  
+$d(b) =$ decision had the person been black (a [potential outcome](http://stat.cmu.edu/~fienberg/Rubin/Rubin-JASA-05.pdf))  
+$d(w) =$ decision had the person been white  
+The observed $d = d(b)$ if the person is black and $= d(w)$ if the person is white. We can also define potential outcomes for $S$.  
+Index people by $i,j$, e.g. $Y_i$ is the outcome for person $i$. Imagine drawing people ([independently and identically](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)) from a population distribution $p(Y,A,X,S,S(b),S(w),d,d(b),d(w) | \mathbf{Y}^{\textrm{train}}, \mathbf{A}^{\textrm{train}}, \mathbf{X}^{\textrm{train}})$. Many fairness definitions are properties of this distribution. From now on we assume everything is conditional on the training data.
 
 ## Definitions
 Here are definitions of fairness found in the literature, along with some important results related to them. We link to papers using the definition or making the claim.  
 
-#### Definitions based on $p(Y, S, A)$
+#### Definitions based on $p(Y, A, S)$
 
 1. *Calibration*:
 $P(Y = 1 \| S = s, A = b) = P(Y = 1 \| S = s, A = w)$ [[Chouldechova]]  
@@ -52,10 +52,10 @@ $E(S \| Y = 1, A = b) = E(S \| Y = 1 , A = w)$ [[Kleinberg et al.]]
     </div>
 
 <div class="result" markdown="1">
-MAY NEED RELAXING: Cannot have 1 + 2 + 3 unless $S=Y$ (perfect prediction) or $p_b = p_w$ (equal base rates) [[Kleinberg et al.]]
+MAY NEED RELAXING: Cannot have 1 + 2 + 3 unless $S=Y$ (perfect prediction) or $P(Y=1\|A=b) = P(Y=1\|A=w)$ (equal base rates) [[Kleinberg et al.]]
 </div>
 
-#### Definitions based on $p(Y, d, A)$
+#### Definitions based on $p(Y, A, d)$
 
 The next four definitions come from the four margins of the *Confusion Matrix*:
 
@@ -123,7 +123,7 @@ those given special names have citations:
     </div>
     
 <div class="result" markdown="1">
-Cannot have 5 + 6 + 7 unless $d=Y$ (perfect prediction) or $p_b = p_w$ (equal base rates) because $\textrm{FPR} = \frac{p}{1-p} \frac{1-\textrm{PPV}}{\textrm{PPV}} (1 - \textrm{FNR})$ [[Chouldechova]]
+Cannot have 5 + 6 + 7 unless $d=Y$ (perfect prediction) or $P(Y=1\|A=b) = P(Y=1\|A=w)$ (equal base rates) because $\textrm{FPR} = \frac{p}{1-p} \frac{1-\textrm{PPV}}{\textrm{PPV}} (1 - \textrm{FNR})$ [[Chouldechova]]
 </div>  
 
    4+5. *Conditional use accuracy equality*: $Y \perp A \| d$ [[Berk et al.]]  
@@ -200,7 +200,7 @@ Papers that use causal definitions often do not make explicit the difference bet
     > Intuition for fair inference: See Section 4 of [Nabi and Shpitser], summarize?  
     > [COMPAS]\: ?
     </div>
-14. *Counterfactual fairness*<a name="counterfactual_fairness"></a>: $P(d(b) = y \| X = x, A = a) = P(d(w) = y \| X = x, A = a)$ [[Kusner et al.]]  
+14. *Counterfactual fairness*<a name="counterfactual_fairness"></a>: $p(d(b) \| A = a, X = x) = p(d(w) \| A = a, X = x)$ [[Kusner et al.]]  
 To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of $A$, but if arrows in the causal diagram represent individual-level effects, this implies a stronger definition of fairness: $d(b) = d(w)$  
 <button class="link" onclick="show('counterfactual_fairness_context')">(context)</button>
     <div id="counterfactual_fairness_context" style="display:none" markdown="1">
@@ -214,7 +214,7 @@ To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of
     > Intuition for no unresolved discrimination  
     > [COMPAS]\: ?
     </div>
-16. *No proxy discrimination*: $P(d(p) = y) = P(d(p') = y)$ for all $p,p'$ for a proxy variable $P$ [[Kilbertus et al.]]  
+16. *No proxy discrimination*: $p(d(a)) = p(d(a'))$ for all $a,a'$ for a proxy variable $A^\textrm{proxy}$ [[Kilbertus et al.]]  
 *Proxy variable*: descendent of $A$ we choose to label as a proxy (e.g. we decide to label skin color as a proxy, and disallow it from affecting admissions)  
 <button class="link" onclick="show('no_proxy_context')">(context)</button>
     <div id="no_proxy_context" style="display:none" markdown="1">
@@ -224,7 +224,7 @@ To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of
 
     <div class="textbox" markdown="1">
     **Causal diagrams.**  
-    The causal fairness literature differs on whether $Y$, $d$, or both are included in the causal diagrams. [Nabi and Shpitser] include $d$ in the causal diagrams. [Kusner et al.] include $Y$ in the causal diagrams (even though [they define fairness](#counterfactual_fairness) in terms of effects on $d$). [Kilbertus et al.] include both $Y$ and $d$ in the causal diagrams (in their Figure 2 only). None include $Y^{\textrm{train}}$.
+    The causal fairness literature differs on whether $Y$, $d$, or both are included in the causal diagrams. [Nabi and Shpitser] include $d$ in the causal diagrams. [Kusner et al.] include $Y$ in the causal diagrams (even though [they define fairness](#counterfactual_fairness) in terms of effects on $d$). [Kilbertus et al.] include both $Y$ and $d$ in the causal diagrams (in their Figure 2 only).
     </div>
 
     <div class="textbox" markdown="1">
@@ -234,7 +234,7 @@ To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of
 
 ## <a name="data"></a> Data
 
-It is important to distinguish between the measured $Y$ (e.g. arrest) and the true $Y^\*$ (e.g. offense). [Lum] highlights this issue, largely overlooked in the literature, which often uses the words "arrest" and "offense" interchangeably. [Corbett-Davies et al.] make the distinction in their discussion section:
+It is important to note that $\mathbf{Y}^{\textrm{train}}$ is what is measured (e.g. arrest), which is often different from the $\mathbf{Y}^{\textrm{true, train}}$ (e.g. offense). [Lum] highlights this issue, largely overlooked in the literature, which often uses the words "arrest" and "offense" interchangeably. [Corbett-Davies et al.] make the distinction in their discussion section:
 > But arrests are an imperfect proxy. Heavier policing in minority neighborhoods might lead to black defendants being arrested more often than whites who commit the same crime [31 - [Lum and Isaac]]. Poor outcome data might thus cause one to systematically underestimate the risk posed by white defendants. This concern is mitigated when the outcome $y$ is serious crime — rather than minor offenses — since such incidents are less susceptible to biased observation. In particular, [Skeem and Lowencamp] [38] note that the racial distribution of individuals arrested for violent offenses is in line with the racial distribution of offenders inferred from victim reports and also in line with self-reported offending data.
 
 [Skeem and Lowencamp]:
