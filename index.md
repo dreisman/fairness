@@ -41,14 +41,14 @@ $E(S \| Y = 0, A = b) = E(S \| Y = 0 , A = w)$ [[Kleinberg et al.]]
 <button class="link" onclick="show('balance_neg_context')">(context)</button>
     <div id="balance_neg_context" style="display:none" markdown="1">
     > If a score is balanced for the negative class, then among people who do not get arrested, risk scores for black and white people have the same average. In other words, for people who did not get arrested, we require that they have been judged to be equally risky, on average.  
-    > [COMPAS]\: ?
+    > [COMPAS]\: I assume not?
     </div>
 3. *Balance for the positive class*: 
 $E(S \| Y = 1, A = b) = E(S \| Y = 1 , A = w)$ [[Kleinberg et al.]]  
 <button class="link" onclick="show('balance_pos_context')">(context)</button>
     <div id="balance_pos_context" style="display:none" markdown="1">
     > If a score is balanced for the positive class, then among people who did get arrested, risk scores for black and white people have the same average. In other words, for people who did get arrested, we require that they have been judged to be equally risky, on average.  
-    > [COMPAS]\: ?
+    > [COMPAS]\: I assume not?
     </div>
 
 <div class="result" markdown="1">
@@ -93,7 +93,6 @@ those given special names have citations:
     $\Leftrightarrow Y \perp A | d = 0$  
 <button class="link" onclick="show('NPV_context')">(context)</button>
     <div id="NPV_context" style="display:none" markdown="1">
-    > For people released
     > [COMPAS]\: ?
     </div>
 5.  *Predictive parity (equal PPVs<a name="PPV"></a>)*: $P(Y=1 \| d = 1, A = b) = P(Y=1 \| d = 1, A = w)$ [[Chouldechova]]  
@@ -101,7 +100,7 @@ those given special names have citations:
     $\Leftrightarrow Y \perp A | d = 1$  
 <button class="link" onclick="show('PPV_context')">(context)</button>
     <div id="PPV_context" style="display:none" markdown="1">
-    > Intuition for predictive parity... calibrated risk scores can produce decisions that do not satisfy predictive parity, depending on the threshold used.
+    > Intuition for predictive parity... calibrated risk scores can produce decisions that do not satisfy predictive parity, depending on the threshold used.  
     > [COMPAS]\: satisfies [[Northpointe]] 
     </div>
 6. *Error rate balance (equal FPRs<a name="FPR"></a>)*: $P(d = 1 \| Y = 0, A = b) = P(d = 1 \| Y = 0, A = w)$ [[Chouldechova]\]  
@@ -149,7 +148,7 @@ or $E(S \| A = b) = E(S \| A = w)$ [[Kleinberg et al.]\]
 10. *Treatment equality (equal FN/FP)*: $\frac{P(d=0, Y=1 \| A = b)}{P(d=1, Y=0 \| A = b)} = \frac{P(d=0, Y=1 \| A = w)}{P(d=1, Y=0 \| A = w)}$ [[Berk et al.]]  
 <button class="link" onclick="show('FN/FP_context')">(context)</button>
     <div id="FN/FP_context" style="display:none" markdown="1">
-    > Intuition for treatment equality 
+    > Intuition for treatment equality  
     > [COMPAS]\: ?
     </div>
 
@@ -198,28 +197,28 @@ Papers that use causal definitions often do not make explicit the difference bet
 <!--- construction: in the real world, a causal model induces some distribution on observed variables $p(d,X,A)$. Fair inference constructs $d^{fair}$ using $p^*(d,X,A)$, the [KL](https://twitter.com/KLdivergence)-closest distribution to $p(d,X,A)$ that blocks certain path-specific effects (PSEs) of $A$ on $d$ -->
 <button class="link" onclick="show('fair_inference_context')">(context)</button>
     <div id="fair_inference_context" style="display:none" markdown="1">
-    > Intuition for fair inference: See Section 4 of [Nabi and Shpitser], summarize?
+    > Intuition for fair inference: See Section 4 of [Nabi and Shpitser], summarize?  
     > [COMPAS]\: ?
     </div>
 14. *Counterfactual fairness*<a name="counterfactual_fairness"></a>: $P(d(b) = y \| X = x, A = a) = P(d(w) = y \| X = x, A = a)$ [[Kusner et al.]]  
 To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of $A$, but if arrows in the causal diagram represent individual-level effects, this implies a stronger definition of fairness: $d(b) = d(w)$  
 <button class="link" onclick="show('counterfactual_fairness_context')">(context)</button>
     <div id="counterfactual_fairness_context" style="display:none" markdown="1">
-    > Intuition for counterfactual fairness
+    > Intuition for counterfactual fairness  
     > [COMPAS]\: ?
     </div>
 15. *No unresolved discrimination*: there is no directed path from $A$ to $d$ unless through a resolving variable [[Kilbertus et al.]]  
 *Resolving variable*<a name="resolving"></a>: a variable whose influence from $A$ we accept as non-discriminatory (e.g. we decide that it is acceptable for race to affect admission rates through department choice)  
 <button class="link" onclick="show('no_unresolved_context')">(context)</button>
     <div id="no_unresolved_context" style="display:none" markdown="1">
-    > Intuition for no unresolved discrimination
+    > Intuition for no unresolved discrimination  
     > [COMPAS]\: ?
     </div>
 16. *No proxy discrimination*: $P(d(p) = y) = P(d(p') = y)$ for all $p,p'$ for a proxy variable $P$ [[Kilbertus et al.]]  
 *Proxy variable*: descendent of $A$ we choose to label as a proxy (e.g. we decide to label skin color as a proxy, and disallow it from affecting admissions)  
 <button class="link" onclick="show('no_proxy_context')">(context)</button>
     <div id="no_proxy_context" style="display:none" markdown="1">
-    > Intuition for no proxy discrimination
+    > Intuition for no proxy discrimination  
     > [COMPAS]\: ?
     </div>
 
