@@ -5,7 +5,7 @@ tagline: notation, definitions, data, legality
 description: 
 ---
 
-We welcome emails and pull requests with additions and corrections!
+The source for this site is [here](https://github.com/speak-statistics-to-power/fairness). We welcome [pull requests](https://yangsu.github.io/pull-request-tutorial/) or emails (<sam942@mail.harvard.edu>) with additions and corrections!
 
 ## Notation
 $A =$ race, for simplicity only $ = b$ or $w$  
@@ -65,23 +65,23 @@ The next four definitions come from the four margins of the *Confusion Matrix*:
 |             |                                  |                                  |         $P(Y=1)$             |                             |
 |-------------|:--------------------------------:|:--------------------------------:|:----------------------------:|:---------------------------:|
 |             |                                  |                                  |  Positive Predictive Value   |     False Discovery Rate    |
-| $d=1$ |        True Positive             |        False Positive            |        ([PPV](#PPV))         |       ([FDR](#FDR))         |
-|             |            (TP)                  |             (FP)                 |  $P(Y = 1 \| d = 1)$   |  $P(Y = 0 \| d = 1)$  |
+|    $d=1$    |        True Positive             |        False Positive            |        ([PPV](#PPV))         |       ([FDR](#FDR))         |
+|             |            (TP)                  |             (FP)                 |     $P(Y = 1 \| d = 1)$      |     $P(Y = 0 \| d = 1)$     |
 |             |                                  |                                  |                              |                             |
 |-------------+----------------------------------+----------------------------------+------------------------------+-----------------------------|
 |             |                                  |                                  |     False Omission Rate      |  Negative Predictive Value  |
-| $d=0$ |        False Negative            |        True Negative             |        ([FOR](#FOR))         |        ([NPV](#NPV))        |
+|    $d=0$    |        False Negative            |        True Negative             |        ([FOR](#FOR))         |        ([NPV](#NPV))        |
 |             |             (FN)                 |            (TN)                  |   $P(Y = 1 \| d = 0)$  |  $P(Y = 0 \| d = 0)$  |
 |             |                                  |                                  |                              |                             |
 |-------------+----------------------------------+----------------------------------+------------------------------+-----------------------------|
 |             |      True Positive Rate          |     False Positive Rate          |                              |                             |
 |             |([TPR](#TPR))<!--- sensitivity -->|        ([FPR](#FPR))             |  [Accuracy](#accuracy)       |                             |
-|             |   $P(d = 1 \| Y = 1)$      |   $P(d = 1 \| Y = 0)$      |      $P(d = Y)$        |                             |
+|             |       $P(d = 1 \| Y = 1)$        |      $P(d = 1 \| Y = 0)$         |         $P(d = Y)$           |                             |
 |             |                                  |                                  |                              |                             |
 |-------------+----------------------------------+----------------------------------+------------------------------+-----------------------------|
 |             |      False Negative Rate         |      True Negative Rate          |                              |                             |
 |             |         ([FNR](#FNR))            |([TNR](#TNR))<!--- specificity -->|                              |                             |
-|             |  $P(d = 0 \| Y = 1)$       |  $P(d = 0 \| Y = 0)$       |                              |                             |
+|             |       $P(d = 0 \| Y = 1)$        |      $P(d = 0 \| Y = 0)$         |                              |                             |
 |-------------+----------------------------------+----------------------------------+------------------------------+-----------------------------|
 
 <br>
@@ -90,6 +90,7 @@ those given special names have citations:
 {:start="4"}
 4.  *equal NPVs<a name="NPV"></a>*: $P(Y=0 \| d = 0, A = b) = P(Y=0 \| d = 0, A = w)$  
     $\Leftrightarrow$ *equal FORs<a name="FOR"></a>*: $P(Y=1 \| d = 0, A = b) = P(Y=1 \| d = 0, A = w)$  
+    $\Leftrightarrow Y \perp A | d = 0$  
 <button class="link" onclick="show('NPV_context')">(context)</button>
     <div id="NPV_context" style="display:none" markdown="1">
     > For people released
@@ -97,6 +98,7 @@ those given special names have citations:
     </div>
 5.  *Predictive parity (equal PPVs<a name="PPV"></a>)*: $P(Y=1 \| d = 1, A = b) = P(Y=1 \| d = 1, A = w)$ [[Chouldechova]]  
     $\Leftrightarrow$ *equal FDRs<a name="FDR"></a>*: $P(Y=0 \| d = 1, A = b) = P(Y=0 \| d = 1, A = w)$  
+    $\Leftrightarrow Y \perp A | d = 1$  
 <button class="link" onclick="show('PPV_context')">(context)</button>
     <div id="PPV_context" style="display:none" markdown="1">
     > Intuition for predictive parity... calibrated risk scores can produce decisions that do not satisfy predictive parity, depending on the threshold used.
@@ -105,6 +107,7 @@ those given special names have citations:
 6. *Error rate balance (equal FPRs<a name="FPR"></a>)*: $P(d = 1 \| Y = 0, A = b) = P(d = 1 \| Y = 0, A = w)$ [[Chouldechova]\]  
 <!--- [Corbett-Davies et al.] calls this *Predictive equality* but may not need to include this term -->
     $\Leftrightarrow$ *equal TNRs<a name="TNR"></a>*: $P(d = 0 \| Y = 0, A = b) = P(d = 0 \| Y = 0, A = w)$  
+    $\Leftrightarrow d \perp A | Y = 0$  
 <button class="link" onclick="show('FPR_context')">(context)</button>
     <div id="FPR_context" style="display:none" markdown="1">
     > Intuition for error rate balance (FPRs)  
@@ -113,6 +116,7 @@ those given special names have citations:
 7. *Error rate balance (equal FNRs<a name="FNR"></a>)*: $P(d = 0 \| Y = 1, A = b) = P(d = 0 \| Y = 1, A = w)$ [[Chouldechova]]  
     $\Leftrightarrow$ *Equal opportunity (equal TPRs<a name="TPR"></a>)*:
     $P(d = 1 \| Y = 1, A = b) = P(d = 1 \| Y = 1, A = w)$ [[Hardt et al.], [Kusner et al.]]  
+    $\Leftrightarrow d \perp A | Y = 1$  
 <button class="link" onclick="show('FNR_context')">(context)</button>
     <div id="FNR_context" style="display:none" markdown="1">
     > Intuition for error rate balance (FNRs)  
