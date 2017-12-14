@@ -41,14 +41,14 @@ $E(S \| Y = 0, A = b) = E(S \| Y = 0 , A = w)$ [[Kleinberg et al.]]
 <button class="link" onclick="show('balance_neg_context')">(context)</button>
     <div id="balance_neg_context" style="display:none" markdown="1">
     > If a score is balanced for the negative class, then among people who do not get arrested, risk scores for black and white people have the same average. In other words, for people who did not get arrested, we require that they have been judged to be equally risky, on average.  
-    > [COMPAS]\: I assume not?
+    > [COMPAS]\: Does not satisfy [[ProPublica]], [[Kleinberg et al.]]
     </div>
 3. *Balance for the positive class*: 
 $E(S \| Y = 1, A = b) = E(S \| Y = 1 , A = w)$ [[Kleinberg et al.]]  
 <button class="link" onclick="show('balance_pos_context')">(context)</button>
     <div id="balance_pos_context" style="display:none" markdown="1">
     > If a score is balanced for the positive class, then among people who did get arrested, risk scores for black and white people have the same average. In other words, for people who did get arrested, we require that they have been judged to be equally risky, on average.  
-    > [COMPAS]\: I assume not?
+    > [COMPAS]\: Does not satisfy [[ProPublica]], [[Kleinberg et al.]]
     </div>
 
 <div class="result" markdown="1">
