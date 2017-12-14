@@ -16,13 +16,13 @@ $S = \hat{P}(Y = 1 | A, X) =$ estimated probability of the outcome
 $d =$ decision/classifier, e.g. $=I(S > s_{\textrm{high-risk}})$ where $s_{\textrm{high-risk}} =$ cutoff/threshold. More generally,  
 &nbsp;&nbsp;&nbsp;&nbsp;$= f_d(A, X, \mathbf{Y}^{\textrm{train}}, \mathbf{A}^{\textrm{train}}, \mathbf{X}^{\textrm{train}})$ where $f_d$ can be stochastic and takes training data  
 &nbsp;&nbsp;&nbsp;&nbsp;(Some papers aren't clear whether they mean $S$ or $d$)  
-$d(b) =$ decision had the person been black (a [potential outcome](http://stat.cmu.edu/~fienberg/Rubin/Rubin-JASA-05.pdf))  
+$d(b) =$ decision had the person been black (a [potential outcome](http://stat.cmu.edu/~fienberg/Rubin/Rubin-JASA-05.pdf), see [challenges with causal interpretations of race](#causal_interp_race))  
 $d(w) =$ decision had the person been white  
 The observed $d = d(b)$ if the person is black and $= d(w)$ if the person is white. We can also define potential outcomes for $S$.  
 Index people by $i,j$, e.g. $Y_i$ is the outcome for person $i$. Imagine drawing people ([independently and identically](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)) from a population distribution $p(Y,A,X,S,S(b),S(w),d,d(b),d(w) | \mathbf{Y}^{\textrm{train}}, \mathbf{A}^{\textrm{train}}, \mathbf{X}^{\textrm{train}})$. Many fairness definitions are properties of this distribution. From now on we assume everything is conditional on the training data.
 
 ## Definitions
-Here are definitions of fairness found in the literature, along with some important results related to them. We link to papers using the definition or making the claim.  
+Here are definitions of fairness found in the literature, along with some results related to them. We link to papers using the definition or making the claim. Context buttons (which need work!) provide intuition and results for widely-used tools like [COMPAS].  
 
 #### Definitions based on $p(Y, A, S)$
 
@@ -164,6 +164,8 @@ So if $P(X = 1 \| A = b) = P(X = 0 \| A = w)$ then we satisfy [parity](#parity).
 
 $$1 = P(d = 1 | A = b, X = 1) \ne P(d = 1 | A = w, X = 1) = 0$$
 
+This is a verson of [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson's_paradox), see p.67-69 of [Blitzstein and Hwang](https://www.crcpress.com/Introduction-to-Probability/Blitzstein-Hwang/p/book/9781466575578).
+
 As [aaronsadventures] puts it:
 > If you know some fact about yourself that makes you think you are not a uniformly random white person, the guarantee can lack bite.
 
@@ -227,7 +229,7 @@ To satisfy this, [Kusner et al.] propose $d$ be a function of non-descendents of
     The causal fairness literature differs on whether $Y$, $d$, or both are included in the causal diagrams. [Nabi and Shpitser] include $d$ in the causal diagrams. [Kusner et al.] include $Y$ in the causal diagrams (even though [they define fairness](#counterfactual_fairness) in terms of effects on $d$). [Kilbertus et al.] include both $Y$ and $d$ in the causal diagrams (in their Figure 2 only).
     </div>
 
-    <div class="textbox" markdown="1">
+    <div class="textbox" markdown="1"><a name="causal_interp_race"></a> 
     **Causal interpretation of race.**  
     [VanderWeele and Robinson]...
     </div>
