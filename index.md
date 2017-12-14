@@ -245,6 +245,8 @@ It is important to note that $\mathbf{Y}^{\textrm{train}}$ is what is measured (
 But [Piquero] says:
 > In official (primarily arrest) records, research has historically revealed that minorities (primarily Blacks because of the lack of other race/ethnicity data) are overrepresented in crime, especially serious crimes such as violence. More recently, this conclusion has started to be questioned, as researchers have started to better study and document the potential Hispanic effect [49]. Analyses of self-reported offending data reveal a much more similar set of estimates regarding offending across race, again primarily in Black-White comparisons...
 
+So I'm not yet convinced that the measurement error is not substantial for violent crimes too.
+
 Are there analytical ways around this measurement error issue? In v1 of their paper, [Nabi and Shpitser] suggested the following:
 > For instance, recidivism in the United States is defined to be a *subsequent arrest*, rather than a *subsequent conviction*. It is well known that certain minority groups in the US are arrested disproportionately, which can certainly bias recidivism risk prediction models to unfairly target those minority groups. We can address this issue in our setting by using a missingness model, a simple version of which is shown in Fig. 1 (d), which is a version of Fig. 1 (a) with two additional variables, $Y(1)$ and $R$. $Y(1)$ represents the underlying true outcome, which is not always observed, $R$ is a missingness indicator, and $Y$ is equal to $Y(1)$ if $R = 1$ and equal to "?" otherwise...Fig. 1 (d) corresponds to a missing at random (MAR) assumption...
 
